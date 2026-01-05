@@ -96,32 +96,43 @@ export default function FanHeader() {
           </div>
 
           <div className="flex flex-wrap items-center gap-3 text-xs text-ice/70">
-            <button
-              aria-label="Open profile"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-ice/20 bg-carbon/70 text-ice/80 transition hover:border-redline/60 hover:text-ice"
-              onClick={handleOpenModal}
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                fill="none"
-                height="18"
-                viewBox="0 0 24 24"
-                width="18"
+            {user ? (
+              <button
+                aria-label="Open profile"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-ice/20 bg-carbon/70 text-ice/80 transition hover:border-redline/60 hover:text-ice"
+                onClick={handleOpenModal}
+                type="button"
               >
-                <path
-                  d="M12 13.5c3.175 0 5.75-2.35 5.75-5.25S15.175 3 12 3 6.25 5.35 6.25 8.25 8.825 13.5 12 13.5Z"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                />
-                <path
-                  d="M4 21c1.9-3.35 5.1-5 8-5s6.1 1.65 8 5"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeWidth="1.5"
-                />
-              </svg>
-            </button>
+                <svg
+                  aria-hidden="true"
+                  fill="none"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  width="18"
+                >
+                  <path
+                    d="M12 13.5c3.175 0 5.75-2.35 5.75-5.25S15.175 3 12 3 6.25 5.35 6.25 8.25 8.825 13.5 12 13.5Z"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                  />
+                  <path
+                    d="M4 21c1.9-3.35 5.1-5 8-5s6.1 1.65 8 5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeWidth="1.5"
+                  />
+                </svg>
+              </button>
+            ) : (
+              <button
+                className="group relative overflow-hidden rounded-full border border-redline/50 bg-redline/10 px-4 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.3em] text-redline transition hover:bg-redline/20"
+                onClick={handleOpenModal}
+                type="button"
+              >
+                <span className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.15)_50%,transparent_75%)] bg-[length:250%_250%] bg-[position:200%_0] transition-all duration-700 group-hover:bg-[position:-100%_0]" />
+                <span className="relative">Sign In</span>
+              </button>
+            )}
             {!hasSupabase && (
               <span className="relative overflow-hidden bg-ink px-3 py-1.5 font-mono text-[10px] text-redline clip-angle">
                 <span className="absolute inset-0 animate-pulse bg-redline/10" />
