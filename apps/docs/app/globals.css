@@ -1,30 +1,28 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --ops-ink: 255 255 255;
+  --ops-panel: 245 246 248;
+  --ops-slate: 232 234 237;
+  --ops-red: 190 0 0;
+  --ops-signal: 225 6 0;
+  --ops-lime: 20 20 20;
+  --ops-fog: 12 12 12;
 }
 
 html,
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
+  min-height: 100%;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  @apply bg-opsink font-body text-opsfog antialiased;
 }
 
 * {
   box-sizing: border-box;
-  padding: 0;
-  margin: 0;
 }
 
 a {
@@ -32,19 +30,93 @@ a {
   text-decoration: none;
 }
 
-.imgDark {
-  display: none;
+::selection {
+  background: rgb(var(--ops-red));
+  color: #ffffff;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-ops-heading);
+  }
+}
+
+@layer components {
+  .admin-kicker {
+    @apply text-[11px] font-semibold uppercase tracking-[0.22em] text-opsfog/60;
   }
 
-  .imgLight {
-    display: none;
+  .admin-kicker-muted {
+    @apply text-[11px] font-semibold uppercase tracking-[0.22em] text-opsfog/50;
   }
-  .imgDark {
-    display: unset;
+
+  .admin-title-lg {
+    @apply text-4xl font-semibold tracking-tight text-opsfog;
+  }
+
+  .admin-title {
+    @apply text-3xl font-semibold tracking-tight text-opsfog;
+  }
+
+  .admin-section-title {
+    @apply text-2xl font-semibold tracking-tight text-opsfog;
+  }
+
+  .admin-description {
+    @apply text-sm text-opsfog/70;
+  }
+
+  .admin-card {
+    @apply rounded-2xl border border-opsfog/10 bg-opspanel/85 shadow-[0_16px_36px_rgba(10,10,10,0.08)] backdrop-blur;
+  }
+
+  .admin-card-inset {
+    @apply rounded-xl border border-opsfog/10 bg-opsink/85;
+  }
+
+  .admin-input {
+    @apply w-full rounded-xl border border-opsfog/15 bg-opsink/85 px-4 py-2.5 text-sm text-opsfog outline-none transition focus:border-opssignal/50 focus:ring-2 focus:ring-opssignal/20;
+  }
+
+  .admin-select {
+    @apply w-full rounded-xl border border-opsfog/15 bg-opsink/85 px-4 py-2.5 text-sm text-opsfog outline-none transition focus:border-opssignal/50 focus:ring-2 focus:ring-opssignal/20;
+  }
+
+  .admin-textarea {
+    @apply w-full rounded-xl border border-opsfog/15 bg-opsink/85 px-4 py-2.5 text-sm text-opsfog outline-none transition focus:border-opssignal/50 focus:ring-2 focus:ring-opssignal/20;
+  }
+
+  .admin-button-primary {
+    @apply inline-flex items-center justify-center rounded-lg bg-opssignal px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-opsink shadow-[0_8px_18px_rgba(0,195,255,0.25)] transition hover:bg-opssignal/90;
+  }
+
+  .admin-button-secondary {
+    @apply inline-flex items-center justify-center rounded-lg border border-opssignal/40 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-opssignal transition hover:border-opssignal/70 hover:text-opsfog;
+  }
+
+  .admin-button-muted {
+    @apply inline-flex items-center justify-center rounded-lg border border-opsfog/30 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-opsfog/80 transition hover:border-opsfog/60 hover:text-opsfog;
+  }
+
+  .admin-pill {
+    @apply rounded-full border border-opsfog/20 px-3 py-1 text-[11px] font-medium text-opsfog/70;
+  }
+}
+
+@layer utilities {
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .text-signal-glow {
+    text-shadow: 0 0 18px rgba(0, 195, 255, 0.45);
   }
 }
