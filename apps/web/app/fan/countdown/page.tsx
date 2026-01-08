@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { supabase } from "../../../lib/supabaseClient";
 import { useActiveEvent } from "../_components/useActiveEvent";
-import { useSupabaseUser } from "../_components/useSupabaseUser";
 
 function formatCountdown(target: Date | null) {
   if (!target) return "No event selected";
@@ -19,10 +17,8 @@ function formatCountdown(target: Date | null) {
 }
 
 export default function CountdownPage() {
-  const { user } = useSupabaseUser();
   const { events, activeEventId, setActiveEventId } = useActiveEvent();
   const [countdown, setCountdown] = useState("Calculating...");
-  const [status, setStatus] = useState("");
 
   const activeEvent = useMemo(
     () => events.find((event) => event.id === activeEventId) ?? null,
@@ -39,20 +35,6 @@ export default function CountdownPage() {
     const timer = window.setInterval(tick, 1000);
     return () => window.clearInterval(timer);
   }, [activeEvent]);
-
-  const handleSaveFavorite = async () => {
-    if (!user) {
-      setStatus("Sign in to save your favorite event.");
-      return;
-    }
-    if (!supabase || !activeEventId) return;
-    const { error } = await supabase
-      .from("profiles")
-      .update({ favorite_event_id: activeEventId })
-      .eq("id", user.id);
-
-    setStatus(error ? error.message : "Favorite event saved.");
-  };
 
   return (
     <div className="space-y-6">
@@ -74,14 +56,6 @@ export default function CountdownPage() {
           <p className="mt-2 text-sm text-ice/60">
             {activeEvent?.name ?? "Select an event to start"}
           </p>
-          <button
-            className="mt-4 rounded-full border border-redline/40 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-redline"
-            onClick={handleSaveFavorite}
-            type="button"
-          >
-            Save as favorite
-          </button>
-          {status && <p className="mt-3 text-xs text-ice/60">{status}</p>}
         </div>
 
         <div className="rounded-3xl border border-ice/15 bg-carbon/70 p-6">

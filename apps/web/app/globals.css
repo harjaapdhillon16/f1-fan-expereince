@@ -1,3 +1,5 @@
+@import "mapbox-gl/dist/mapbox-gl.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -69,9 +71,42 @@ a {
     background-position: 0 0, 18px 18px;
   }
 
-  .text-glow {
+.text-glow {
     text-shadow: 0 0 22px rgba(225, 6, 0, 0.45);
   }
+}
+
+.f1-map-container .mapboxgl-canvas-container,
+.f1-map-container .mapboxgl-canvas {
+  border-radius: 16px;
+}
+
+.f1-map-container .mapboxgl-canvas-container {
+  overflow: hidden;
+}
+
+.f1-map-popup .mapboxgl-popup-content {
+  background: rgba(var(--f1-carbon), 0.92);
+  border: 1px solid rgba(var(--f1-ice), 0.15);
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+  color: rgb(var(--f1-ice));
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+}
+
+.f1-map-popup__label {
+  display: block;
+  letter-spacing: 0.04em;
+}
+
+.f1-map-popup .mapboxgl-popup-tip {
+  border-top-color: rgba(var(--f1-carbon), 0.92);
+  border-bottom-color: rgba(var(--f1-carbon), 0.92);
+  border-left-color: rgba(var(--f1-carbon), 0.92);
+  border-right-color: rgba(var(--f1-carbon), 0.92);
 }
 
 html[data-contrast="high"] {
