@@ -92,7 +92,7 @@ export default function FanHeader() {
             <span className="flex h-9 w-9 items-center justify-center rounded-full border border-ice/20 bg-carbon/70 font-heading text-lg text-ice">
               F1
             </span>
-            <span className="font-heading text-xl">Spanish Grand Prix 2026</span>
+            <span className="font-heading text-xl">Mexico Grand Prix 2026</span>
           </div>
 
           <div className="flex flex-wrap items-center gap-3 text-xs text-ice/70">

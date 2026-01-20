@@ -12,7 +12,7 @@ export default function FanEntry() {
             Fan App & Ops Console
           </h1>
           <p className="text-sm text-ice/70">
-            Launch the fan-facing PWA or jump to the admin operations console.
+            Launch the fan-facing app
           </p>
           <div className="flex flex-wrap gap-4">
             <Link
@@ -21,12 +21,7 @@ export default function FanEntry() {
             >
               Enter Fan App
             </Link>
-            <a
-              className="rounded-full border border-ice/30 px-6 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-ice/80"
-              href="http://localhost:3001/admin"
-            >
-              Open Admin Ops
-            </a>
+            
           </div>
         </div>
       </div>

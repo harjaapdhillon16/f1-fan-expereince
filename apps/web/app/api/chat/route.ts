@@ -4,44 +4,62 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const DEMO_CONTEXT = `
-Spanish Grand Prix 2026 (DEMO DATA)
-Event: Formula 1 Gran Premio de Espana 2026
-Venue: Circuit de Barcelona-Catalunya, Montmelo (Barcelona), Spain
-Timezone: Europe/Madrid (CEST)
-Dates: 22-24 May 2026
+Mexico City Grand Prix 2026 
+Event: Formula 1 Gran Premio de la Ciudad de México 2026
+Venue: Autódromo Hermanos Rodríguez, Mexico City, Mexico
+Timezone: America/Mexico_City (CST - Central Standard Time, UTC-6)
+Dates: 30 October - 1 November 2026
 
-Session schedule (local time, demo):
-- Fri 22 May: Practice 1 11:30, Practice 2 15:00
-- Sat 23 May: Practice 3 10:30, Qualifying 14:00
-- Sun 24 May: Race 15:00
+Session schedule (local time, demo based on typical F1 format):
+- Fri 30 Oct: Practice 1 12:30, Practice 2 16:00
+- Sat 31 Oct: Practice 3 12:30, Qualifying 16:00
+- Sun 1 Nov: Race 14:00
 
 Gates & entry (demo):
-- Gate 1 (Main): opens 07:30, closest to Fan Village
-- Gate 3 (North): opens 08:00, closest to Grandstand G
-- Gate 5 (South): opens 08:00, closest to General Admission hills
+- Gate 1 (Velódromo): closest to Metro Velódromo station (Line 9)
+- Gates 4-7 (Ciudad Deportiva): closest to Metro Ciudad Deportiva station (Line 9)
+- Gates 8-9 (Puebla area): closest to Metro Puebla station (Line 9)
+- Gates 13-14 (South): closest to Metrobus Line 2 (UPIICSA, El Rodeo stations)
+- Gate opening: typically 07:00-08:00 on event days
+- Note: No re-entry allowed once you leave the circuit
 
 Transport & parking (demo):
-- Train: Rodalies R2 to Montmelo + free shuttle every 10 min
-- Parking lots: P1 (premium), P2 (general), P3 (overflow)
-- Rideshare drop-off: Gate 3 loop
+- Metro: Line 9 (brown line) - Velódromo, Ciudad Deportiva, Puebla stations
+- Metrobus: Line 2 (purple) - UPIICSA, El Rodeo stations (south side access)
+- No general parking at circuit - public transport strongly recommended
+- Taxi/Uber drop-off available but expect traffic delays
+- Free shuttle bus travels around circuit perimeter between zones
 
 On-site services (demo):
-- Info desk: Fan Village (by Main Stage)
-- Medical: posts at Gate 1 and Gate 5
-- Lost & found: Info desk until 19:30
-- Accessibility: accessible viewing at Grandstand K, ramps at Gate 1
+- Circuit divided into color-coded zones - must enter through correct gate for your zone
+- Medical posts available throughout venue
+- Info desk: Fan Village area
+- 12+ free water refill stations across the circuit
+- Accessibility: Accessible viewing and ramps at Green and Blue zones
+- Food & drink: 50+ options including tacos, churros, pizza, seafood
+- Payment: Citibanamex Cashless rechargeable card system (can top up with cash/card)
+- Beer available: 11:00-19:00, Hard liquor: 12:00-19:00
 
 Policies (demo):
-- Bag limit: 20L soft bag only
-- Prohibited: glass, drones, flares, large umbrellas
-- Re-entry: allowed before 18:00 with wristband scan
+- Bag limit: Standard small-size bags only (backpack, messenger bag) - NO camping backpacks
+- Prohibited items: Glass bottles, outside alcohol, drones, large umbrellas, camping chairs, 
+  professional cameras (lens >300mm), selfie sticks, tripods, fireworks, weapons, balls, 
+  horns, whistles, laser pointers, unauthorized transportation (bikes, scooters)
+- Allowed items: Hats, sunscreen, sunglasses, beach towels, cameras (lens <300mm, 2 lenses max),
+  GoPro cameras, small bags, motorcycle helmets, flags/posters (PVC mast only), 
+  raincoats, small strollers, binoculars, external phone batteries, baby food
+- Re-entry: NOT allowed - once you exit, you cannot return the same day
+- Security: Airport-style screening at all entrances
+
+Special notes (demo):
+- Circuit located 2,240m (7,340 ft) above sea level - bring sun protection and stay hydrated
+- Famous Foro Sol stadium section provides incredible atmosphere
+- Weather in late October: mild days (22°C/72°F), cooler evenings - dress in layers
 `;
 
 function buildSystemPrompt(eventName?: string) {
   return `
 You are F1 Fan Assist, a friendly on-site chatbot for event attendees.
-Use only the demo data provided below when answering questions.
-If a detail is not in the demo data, say it is not available in the demo and suggest checking the info desk.
 Keep answers short, practical, and confident. Ask one clarifying question only if needed.
 Include times with timezone. Do not invent facts.
 
@@ -79,7 +97,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const apiKey = 'sk-05ba3770332f4ca683896c153bafbbac'
+   const apiKey = 'sk-05ba3770332f4ca683896c153bafbbac'
   if (!apiKey) {
     return NextResponse.json(
       { error: "DeepSeek API key is not configured." },

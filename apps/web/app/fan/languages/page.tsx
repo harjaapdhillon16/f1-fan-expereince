@@ -6,7 +6,7 @@ import { useSupabaseUser } from "../_components/useSupabaseUser";
 
 const languages = [
   { code: "en", label: "English" },
-  { code: "es", label: "Spanish" },
+  { code: "es", label: "Mexico" },
   { code: "fr", label: "French" },
   { code: "ar", label: "Arabic (Latin)" },
   { code: "de", label: "German" },

@@ -14,6 +14,22 @@ interface ChatMessage {
   created_at: string;
 }
 
+function createLocalId() {
+  if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
+    return crypto.randomUUID();
+  }
+  return `local-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+}
+
+function createLocalMessage(role: "user" | "assistant", message: string): ChatMessage {
+  return {
+    id: createLocalId(),
+    role,
+    message,
+    created_at: new Date().toISOString(),
+  };
+}
+
 function formatChatTime(value: string) {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return "";
@@ -21,9 +37,7 @@ function formatChatTime(value: string) {
 }
 
 const quickPrompts = [
-  "When does the 2026 Spanish GP race start?",
-  "Which gate is best for Grandstand G?",
-  "How do I get from Montmelo station?",
+  "When does the 2026 Mexico GP race start?",
   "What is the bag policy?",
 ];
 
@@ -87,24 +101,21 @@ export default function ChatPage() {
   }, [messages.length, isSending]);
 
   const sendMessage = async (text: string) => {
-    if (!user) {
-      setStatus("Sign in to chat with the assistant.");
-      return;
-    }
-    if (!supabase) return;
-    if (!text.trim()) return;
+    const trimmed = text.trim();
+    if (!trimmed) return;
     if (isSending) return;
 
     setIsSending(true);
     setStatus("");
 
     try {
+      const canPersist = Boolean(user && supabase);
       let activeThreadId = threadId;
 
-      if (!activeThreadId) {
-        const { data, error } = await supabase
+      if (canPersist && !activeThreadId) {
+        const { data, error } = await supabase!
           .from("chat_threads")
-          .insert({ event_id: activeEventId, user_id: user.id })
+          .insert({ event_id: activeEventId, user_id: user!.id })
           .select("id")
           .single();
         if (error || !data) {
@@ -114,18 +125,23 @@ export default function ChatPage() {
         setThreadId(data.id);
       }
 
-      const { data: newMessage, error: messageError } = await supabase
-        .from("chat_messages")
-        .insert({ thread_id: activeThreadId, role: "user", message: text })
-        .select("id, role, message, created_at")
-        .single();
+      if (canPersist) {
+        const { data: newMessage, error: messageError } = await supabase!
+          .from("chat_messages")
+          .insert({ thread_id: activeThreadId, role: "user", message: trimmed })
+          .select("id, role, message, created_at")
+          .single();
 
-      if (messageError || !newMessage) {
-        setStatus(messageError?.message ?? "Unable to send message.");
-        return;
+        if (messageError || !newMessage) {
+          setStatus(messageError?.message ?? "Unable to send message.");
+          return;
+        }
+
+        setMessages((prev) => [...prev, newMessage]);
+      } else {
+        const localMessage = createLocalMessage("user", trimmed);
+        setMessages((prev) => [...prev, localMessage]);
       }
-
-      setMessages((prev) => [...prev, newMessage]);
       setInput("");
 
       const history = messages
@@ -145,7 +161,7 @@ export default function ChatPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          message: text,
+          message: trimmed,
           history,
           eventName: activeEvent?.name ?? undefined,
         }),
@@ -164,21 +180,26 @@ export default function ChatPage() {
         throw new Error("Assistant did not return a response.");
       }
 
-      const { data: assistantMessage, error: assistantError } = await supabase
-        .from("chat_messages")
-        .insert({
-          thread_id: activeThreadId,
-          role: "assistant",
-          message: reply,
-        })
-        .select("id, role, message, created_at")
-        .single();
+      if (canPersist) {
+        const { data: assistantMessage, error: assistantError } = await supabase!
+          .from("chat_messages")
+          .insert({
+            thread_id: activeThreadId,
+            role: "assistant",
+            message: reply,
+          })
+          .select("id, role, message, created_at")
+          .single();
 
-      if (assistantError || !assistantMessage) {
-        throw new Error(assistantError?.message ?? "Unable to save response.");
+        if (assistantError || !assistantMessage) {
+          throw new Error(assistantError?.message ?? "Unable to save response.");
+        }
+
+        setMessages((prev) => [...prev, assistantMessage]);
+      } else {
+        const localReply = createLocalMessage("assistant", reply);
+        setMessages((prev) => [...prev, localReply]);
       }
-
-      setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
       setStatus(
         error instanceof Error ? error.message : "Unable to reach the assistant."
@@ -208,7 +229,7 @@ export default function ChatPage() {
             <div>
               <p className="text-sm font-semibold text-ice">Circuit Assistant</p>
               <p className="text-xs text-ice/60">
-                {activeEvent?.name ?? "Spanish Grand Prix 2026 Demo"}
+                {activeEvent?.name ?? "Mexico Grand Prix 2026 Demo"}
               </p>
             </div>
           </div>
@@ -342,7 +363,7 @@ export default function ChatPage() {
             )}
             {messages.length === 0 && !isSending && (
               <div className="flex h-full items-center justify-center text-xs text-ice/60">
-                Ask anything about the Spanish Grand Prix 2026 demo event.
+                Ask anything about the Mexico Grand Prix 2026 demo event.
               </div>
             )}
           </div>
@@ -380,6 +401,11 @@ export default function ChatPage() {
                 Send
               </button>
             </div>
+            {!user && (
+              <p className="mt-3 text-xs text-ice/50">
+                Guest mode: chats are not saved unless you sign in.
+              </p>
+            )}
             {status && <p className="mt-3 text-xs text-ice/60">{status}</p>}
           </div>
         </div>

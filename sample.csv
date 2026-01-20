@@ -1,0 +1,21 @@
+id,layer_id,name,point_type,latitude,longitude,metadata,created_at
+a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d,b40e89b0-c2e3-4f32-90de-52637a1f5745,Gate 1 - Velódromo,entrance,19.4065,-99.0925,"{""zone"": ""main"", ""metro_station"": ""Velódromo Line 9""}",2026-01-20 12:00:00.000000+00
+b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e,b40e89b0-c2e3-4f32-90de-52637a1f5745,Gate 5 - Ciudad Deportiva,entrance,19.4028,-99.0895,"{""zone"": ""green"", ""metro_station"": ""Ciudad Deportiva Line 9""}",2026-01-20 12:00:00.000000+00
+c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f,b40e89b0-c2e3-4f32-90de-52637a1f5745,Gate 9 - Puebla,entrance,19.4020,-99.0865,"{""zone"": ""blue"", ""metro_station"": ""Puebla Line 9""}",2026-01-20 12:00:00.000000+00
+d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8a,b40e89b0-c2e3-4f32-90de-52637a1f5745,Medical Center - Main,medical,19.4045,-99.0910,"{""hours"": ""07:00-20:00"", ""services"": ""emergency, first aid""}",2026-01-20 12:00:00.000000+00
+e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b,b40e89b0-c2e3-4f32-90de-52637a1f5745,Medical Post - Foro Sol,medical,19.4018,-99.0885,"{""hours"": ""07:00-20:00"", ""services"": ""first aid""}",2026-01-20 12:00:00.000000+00
+f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c,b40e89b0-c2e3-4f32-90de-52637a1f5745,Toilets - Grandstand 1,toilet,19.4052,-99.0920,"{""accessible"": true}",2026-01-20 12:00:00.000000+00
+a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d,b40e89b0-c2e3-4f32-90de-52637a1f5745,Toilets - Foro Sol Stadium,toilet,19.4015,-99.0880,"{""accessible"": true, ""capacity"": ""large""}",2026-01-20 12:00:00.000000+00
+b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e,b40e89b0-c2e3-4f32-90de-52637a1f5745,Toilets - Green Zone,toilet,19.4035,-99.0895,"{""accessible"": true}",2026-01-20 12:00:00.000000+00
+c9d0e1f2-a3b4-4c5d-6e7f-8a9b0c1d2e3f,b40e89b0-c2e3-4f32-90de-52637a1f5745,Fan Village,info,19.4048,-99.0915,"{""services"": ""info desk, merchandise, activities""}",2026-01-20 12:00:00.000000+00
+d0e1f2a3-b4c5-4d6e-7f8a-9b0c1d2e3f4a,b40e89b0-c2e3-4f32-90de-52637a1f5745,Info Desk - Gate 5,info,19.4028,-99.0893,"{""hours"": ""07:00-19:30""}",2026-01-20 12:00:00.000000+00
+e1f2a3b4-c5d6-4e7f-8a9b-0c1d2e3f4a5b,b40e89b0-c2e3-4f32-90de-52637a1f5745,Water Station - Turn 1,water,19.4055,-99.0918,"{""free"": true}",2026-01-20 12:00:00.000000+00
+f2a3b4c5-d6e7-4f8a-9b0c-1d2e3f4a5b6c,b40e89b0-c2e3-4f32-90de-52637a1f5745,Water Station - Foro Sol,water,19.4012,-99.0878,"{""free"": true}",2026-01-20 12:00:00.000000+00
+a3b4c5d6-e7f8-4a9b-0c1d-2e3f4a5b6c7d,b40e89b0-c2e3-4f32-90de-52637a1f5745,Water Station - Main Straight,water,19.4042,-99.0905,"{""free"": true}",2026-01-20 12:00:00.000000+00
+b4c5d6e7-f8a9-4b0c-1d2e-3f4a5b6c7d8e,b40e89b0-c2e3-4f32-90de-52637a1f5745,Food Court - Main,food,19.4050,-99.0912,"{""cuisine"": ""tacos, churros, international"", ""payment"": ""cashless card""}",2026-01-20 12:00:00.000000+00
+c5d6e7f8-a9b0-4c1d-2e3f-4a5b6c7d8e9f,b40e89b0-c2e3-4f32-90de-52637a1f5745,Food Court - Foro Sol,food,19.4010,-99.0882,"{""cuisine"": ""mexican, pizza, seafood"", ""payment"": ""cashless card""}",2026-01-20 12:00:00.000000+00
+d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a,b40e89b0-c2e3-4f32-90de-52637a1f5745,Merchandise Store - Main,shop,19.4047,-99.0914,"{""items"": ""team gear, hats, souvenirs""}",2026-01-20 12:00:00.000000+00
+e7f8a9b0-c1d2-4e3f-4a5b-6c7d8e9f0a1b,b40e89b0-c2e3-4f32-90de-52637a1f5745,Parking - Rideshare Drop-off,parking,19.4060,-99.0930,"{""type"": ""drop-off only"", ""access"": ""Gate 1""}",2026-01-20 12:00:00.000000+00
+f8a9b0c1-d2e3-4f4a-5b6c-7d8e9f0a1b2c,b40e89b0-c2e3-4f32-90de-52637a1f5745,Metro Station - Velódromo,transport,19.4072,-99.0935,"{""line"": ""9 Brown"", ""walking_time"": ""5 min to Gate 1""}",2026-01-20 12:00:00.000000+00
+a9b0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3d,b40e89b0-c2e3-4f32-90de-52637a1f5745,Metro Station - Ciudad Deportiva,transport,19.4025,-99.0890,"{""line"": ""9 Brown"", ""walking_time"": ""3 min to Gates 4-7""}",2026-01-20 12:00:00.000000+00
+b0c1d2e3-f4a5-4b6c-7d8e-9f0a1b2c3d4e,b40e89b0-c2e3-4f32-90de-52637a1f5745,Metro Station - Puebla,transport,19.4018,-99.0860,"{""line"": ""9 Brown"", ""walking_time"": ""5 min to Gates 8-9""}",2026-01-20 12:00:00.000000+00
